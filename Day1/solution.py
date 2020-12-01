@@ -1,20 +1,14 @@
 from utils.io import get_input_numbers
+from itertools import permutations
+from functools import reduce
+from typing import List
 
 
-def find_product_of_2_that_sum_up_to_2020(numbers):
-    for first in numbers:
-        for second in numbers:
-            if second + first == 2020:
-                return second * first
+def find_product_of_n_nums_that_sum_up_to_2020(numbers: List[int], n: int) -> int:
+    for permutation in permutations(numbers, n):
+        if sum(permutation) == 2020:
+            return reduce(lambda x, y: x * y, permutation)
 
 
-def find_product_of_3_that_sum_up_to_2020(numbers):
-    for first in numbers:
-        for second in numbers:
-            for third in numbers:
-                if third + second + first == 2020:
-                    return third * second * first
-
-
-print(f'Part 1 solution: {find_product_of_2_that_sum_up_to_2020(get_input_numbers())}')
-print(f'Part 2 solution: {find_product_of_3_that_sum_up_to_2020(get_input_numbers())}')
+print(f'Part 1 solution: {find_product_of_n_nums_that_sum_up_to_2020(get_input_numbers(), 2)}')
+print(f'Part 2 solution: {find_product_of_n_nums_that_sum_up_to_2020(get_input_numbers(), 3)}')
